@@ -8,8 +8,19 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 
 /**
- *
- * @author hordric
+ * Réprésente un Produit en vente dans la boutique.
+ * 
+ * @author ASSOUN Rodrigue
+ */
+
+
+/**
+ * 
+ * Description 
+ * Ligne vide
+ * 
+ * Directive 1
+ * direct2
  */
 @XmlRootElement
 public class Produit {
@@ -18,10 +29,23 @@ public class Produit {
     private double prixUnitaire;
     private LocalDate datePerention;
     private Categorie cateborie;
+    
+    /**
+     * Instance un objet <Code>Produit</code> vierge,
+     */
 
     public Produit (){
         
     }
+    
+    /**
+     * Instance un objet <Code>Produit</code>  avec les valeurs entrées en paramètre.,
+     * @param id L'identifiant du produit,
+     * @param libelle le Libellé,
+     * @param prixUnitaire Le prix unitaire,
+     * @param datePerention la date de prerention,
+     * @param cateborie La catégorie
+     */
     public Produit(long id, String libelle, double prixUnitaire, LocalDate datePerention, Categorie cateborie) {
         this.id = id;
         this.libelle = libelle;
@@ -35,6 +59,22 @@ public class Produit {
         this.libelle = libelle;
         this.prixUnitaire = prixUnitaire;
         this.datePerention = datePerention;
+    }
+    /**
+     * Verifie si le produit est perimé par rapport à une date de référence,
+     * @return <code>true</code> si le produit est perimé , <code>false</code> sinon.
+     */
+    public boolean estPerimer(){
+        LocalDate perimer = LocalDate.now(); 
+        return datePerention.isBefore(perimer);  
+    }
+    /**
+     * Verifie si le produit est perimé,
+     * @param dateReference
+     * @return <code>true</code> si le produit est perimé, <code>false</code> sinon.
+     */
+    public boolean estPerimer(LocalDate dateReference){
+        return datePerention.isBefore(dateReference);
     }
     
     public long getId() {
@@ -99,16 +139,6 @@ public class Produit {
         return this.id == other.id;
     }
     
-    
-    public boolean estPerimer(){
-        LocalDate perimer = LocalDate.now(); 
-        return datePerention.isBefore(perimer);  
-    }
-    
-    public boolean estPerimer(LocalDate dateReference){
-        return datePerention.isBefore(dateReference);
-    }
-
     @Override
     public String toString() {
         return "Produit{" 
